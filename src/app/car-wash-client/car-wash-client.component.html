@@ -1,0 +1,55 @@
+<div id="main">
+  <h1>Myjnia samochodowa PerfectWash</h1>
+  <h2>Dane klienta:</h2>
+
+  <ul>
+    <li><b>Imie i nazwisko:</b> {{name}} {{surname}}</li>
+    <li><b>Email:</b> {{email}}</li>
+    <li><b>Address:</b> {{address.street}} {{address.flatNo}} {{address.houseNo}} </li>
+    <li>{{address.postalCode}}{{address.city}}</li>
+  </ul>
+
+  <form (submit)="addService(service.value)">
+    <div>
+      <label for="serviceField">Wpisz nazwę usługi: </label>
+      <input type="text" #service id="serviceField">
+    </div>
+  </form>
+
+  <button (click)="addService(service.value)">Dodaj usługę</button>
+
+  <h3>Wybrane usługi dodatkowe:</h3>
+  <ul>
+    <li *ngFor="let service of services; let i = index">
+      <button (click)="deleteService(service)">Usuń usługę</button>
+      {{i + 1}}. {{service}}
+
+    </li>
+  </ul>
+
+
+  <div>
+    <button (click)="changeEditMode()">Edytuj klienta</button>
+  </div>
+
+  <div *ngIf=editMode>
+    <h2>Dane do edycji:</h2>
+    <form>
+      <div class="editData">
+        <label>Imie: </label>
+        <input type="text" [(ngModel)]="name" name="name">
+      </div>
+
+      <div class="editData">
+        <label>Nazwisko: </label>
+        <input type="text" [(ngModel)]="surname" name="surname">
+      </div>
+
+      <div class="editData">
+        <label>Email: </label>
+        <input type="text" [(ngModel)]="email" name="email">
+      </div>
+
+    </form>
+  </div>
+</div>
